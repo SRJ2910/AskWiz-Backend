@@ -8,11 +8,14 @@ def hello():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+	json = request.get_json()
+	print(json)
 	lr = joblib.load("dopaNet.pkl")
 	if lr:
 		try:
 			json = request.get_json()
 			
+			# print(json)
 			pred = {
 				'context': json.get("context"),
 				'question': json.get("question")
